@@ -1,3 +1,5 @@
+# [![Backend CI](https://github.com/migbara/proyecto_mvp/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/migbara/proyecto_mvp/actions/workflows/backend-ci.yml)
+# [![Frontend CI](https://github.com/migbara/proyecto_mvp/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/migbara/proyecto_mvp/actions/workflows/frontend-ci.yml)
 # Proyecto MVP - Fullstack example
 
 Este repositorio es un scaffold didáctico para explorar prácticas de arquitectura y herramientas de desarrollo en un proyecto fullstack mínimo. Tiene dos aplicaciones dentro de un mismo repositorio (monorepo): el `frontend` (página estática con botones para incrementar/decrementar un contador) y el `backend` (API en Node.js + Express, persistencia en MariaDB).
