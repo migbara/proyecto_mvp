@@ -20,7 +20,7 @@ app.get('/api/counter', async (req, res) => {
 app.post('/api/counter/increment', async (req, res) => {
   const c = await Counter.findByPk(1);
   if (!c) return res.status(404).json({ error: 'not found' });
-  c.valor = c.valor + 1;
+  c.valor = c.valor + 2;
   await c.save();
   res.json({ id: c.id, valor: c.valor });
 });
