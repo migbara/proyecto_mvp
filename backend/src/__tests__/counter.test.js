@@ -18,7 +18,7 @@ app.get('/api/counter', async (req, res) => {
 app.post('/api/counter/increment', async (req, res) => {
   const c = await CounterModel.findByPk(1);
   if (!c) return res.status(404).json({ error: 'not found' });
-  c.valor = c.valor + 1;
+  c.valor = c.valor + 2;
   await c.save();
   res.json({ id: c.id, valor: c.valor });
 });
@@ -57,13 +57,13 @@ test('counter workflow', async () => {
 
   res = await agent.post('/api/counter/increment');
   expect(res.status).toBe(200);
-  expect(res.body.valor).toBe(1);
-
-  res = await agent.post('/api/counter/increment');
   expect(res.body.valor).toBe(2);
 
+  res = await agent.post('/api/counter/increment');
+  expect(res.body.valor).toBe(4);
+
   res = await agent.post('/api/counter/decrement');
-  expect(res.body.valor).toBe(1);
+  expect(res.body.valor).toBe(3);
 
   res = await agent.post('/api/counter/reset');
   expect(res.body.valor).toBe(0);
