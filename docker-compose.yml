@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  db:
+    image: mariadb:11.2
+    environment:
+      MYSQL_ROOT_PASSWORD: baloncesto
+      MYSQL_DATABASE: proyecto_mvp
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+
+  backend:
+    build: ./backend
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: baloncesto
+      DB_NAME: proyecto_mvp
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+    name: proyecto_mvp_db_data

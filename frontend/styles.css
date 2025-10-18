@@ -1,0 +1,41 @@
+body {
+    font-family: Inter, Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #f6f8fa, #e9eff5);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(20, 30, 60, 0.08);
+    width: 320px;
+    text-align: center;
+}
+
+.value {
+    font-size: 48px;
+    margin: 12px 0;
+    color: #0b61ff;
+}
+
+.buttons button {
+    margin: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    background: #0b61ff;
+    color: white;
+    cursor: pointer;
+}
+
+.buttons button#dec {
+    background: #ff6b6b
+}
+
+.buttons button#reset {
+    background: #6c757d
+}

@@ -1,0 +1,12 @@
+{
+  "info": {
+    "name": "Proyecto MVP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    { "name": "Get counter", "request": { "method": "GET", "url": "{{baseUrl}}/api/counter" } },
+    { "name": "Increment", "request": { "method": "POST", "url": "{{baseUrl}}/api/counter/increment" } },
+    { "name": "Decrement", "request": { "method": "POST", "url": "{{baseUrl}}/api/counter/decrement" } },
+    { "name": "Reset", "request": { "method": "POST", "url": "{{baseUrl}}/api/counter/reset" } }
+  ]
+}
