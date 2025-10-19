@@ -18,9 +18,15 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   logging: false
 });
 
-const Counter = require('./counter')(sequelize);
+const counterModule = require('./counter');
+const Counter = counterModule.defineCounter(sequelize);
 
 module.exports = {
   sequelize,
-  Counter
+  Counter,
+  incrementCounter: counterModule.incrementCounter,
+  decrementCounter: counterModule.decrementCounter,
+  resetCounter: counterModule.resetCounter,
+  incrementValue: counterModule.incrementValue,
+  decrementValue: counterModule.decrementValue
 };

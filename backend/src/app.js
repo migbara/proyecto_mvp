@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const { Counter } = require('./models');
+const { Counter, incrementCounter, decrementCounter, resetCounter, incrementValue, decrementValue } = require('./models');
+const createCounterRouter = require('./routes/counter');
 
 // Ensure required environment variables are set
 if (!process.env.CORS_ORIGIN) {
@@ -11,34 +12,8 @@ const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 
-app.get('/api/counter', async (req, res) => {
-  const c = await Counter.findByPk(1);
-  if (!c) return res.status(404).json({ error: 'not found' });
-  res.json({ id: c.id, valor: c.valor });
-});
 
-app.post('/api/counter/increment', async (req, res) => {
-  const c = await Counter.findByPk(1);
-  if (!c) return res.status(404).json({ error: 'not found' });
-  c.valor = c.valor + 2;
-  await c.save();
-  res.json({ id: c.id, valor: c.valor });
-});
-
-app.post('/api/counter/decrement', async (req, res) => {
-  const c = await Counter.findByPk(1);
-  if (!c) return res.status(404).json({ error: 'not found' });
-  c.valor = c.valor - 1;
-  await c.save();
-  res.json({ id: c.id, valor: c.valor });
-});
-
-app.post('/api/counter/reset', async (req, res) => {
-  const c = await Counter.findByPk(1);
-  if (!c) return res.status(404).json({ error: 'not found' });
-  c.valor = 0;
-  await c.save();
-  res.json({ id: c.id, valor: c.valor });
-});
+// Montar el router centralizado para /api/counter
+app.use('/api/counter', createCounterRouter({ Counter, incrementCounter, decrementCounter, resetCounter }, { incrementAmount: incrementValue, decrementAmount: decrementValue }));
 
 module.exports = app;

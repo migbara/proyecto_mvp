@@ -28,6 +28,9 @@ services:
       DB_NAME: proyecto_mvp
     ports:
       - 3000:3000
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - db
 
@@ -35,6 +38,8 @@ services:
     build: ./frontend
     ports:
       - 8000:80
+    volumes:
+      - ./frontend:/usr/share/nginx/html
     depends_on:
       - backend
 

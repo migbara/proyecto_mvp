@@ -1,7 +1,7 @@
-FROM node:20-alpine
-WORKDIR /app
+FROM node:20
+WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm install --production
+RUN npm install -g nodemon && npm install
 COPY . .
 EXPOSE 3000
-CMD ["node", "src/index.js"]
+CMD ["nodemon", "src/index.js"]
