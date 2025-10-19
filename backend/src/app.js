@@ -3,13 +3,14 @@ const cors = require('cors');
 const { Counter, incrementCounter, decrementCounter, resetCounter, incrementValue, decrementValue } = require('./models');
 const createCounterRouter = require('./routes/counter');
 
-// Ensure required environment variables are set
-if (!process.env.CORS_ORIGIN) {
+// In test environment we allow missing CORS_ORIGIN and use a permissive default
+const corsOrigin = process.env.CORS_ORIGIN || (process.env.NODE_ENV === 'test' ? '*' : null);
+if (!corsOrigin) {
   throw new Error('CORS_ORIGIN environment variable is required');
 }
 
 const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 
 
