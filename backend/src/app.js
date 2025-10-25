@@ -3,14 +3,31 @@ const cors = require('cors');
 const { Counter, incrementCounter, decrementCounter, resetCounter, incrementValue, decrementValue } = require('./models');
 const createCounterRouter = require('./routes/counter');
 
-// In test environment we allow missing CORS_ORIGIN and use a permissive default
-const corsOrigin = process.env.CORS_ORIGIN || (process.env.NODE_ENV === 'test' ? '*' : null);
-if (!corsOrigin) {
-  throw new Error('CORS_ORIGIN environment variable is required');
+// Parse CORS origins from env var (comma-separated list) or use defaults
+function parseOrigins(originsStr) {
+  if (!originsStr) return null;
+  // Trim whitespace from each origin
+  return originsStr.split(',').map(origin => origin.trim());
 }
 
+// Define allowed origins
+const allowedOrigins = ['http://hp-pavilion-1:8000', 'http://localhost:8000', 'http://127.0.0.1:8000'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('CORS policy violation'));
+    }
+    return callback(null, true);
+  },
+  credentials: true
+};
+
+console.log('CORS Origins:', allowedOrigins);
+
 const app = express();
-app.use(cors({ origin: corsOrigin }));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 

@@ -16,6 +16,8 @@ function createCounterRouter({ Counter, incrementCounter, decrementCounter, rese
     const c = await Counter.findByPk(1);
     if (!c) return res.status(404).json({ error: 'not found' });
     await incrementCounter(c, INCREMENT_AMOUNT);
+    // Emitir evento por socket.io
+    req.app.locals.io?.emit('counter:update', { valor: c.valor });
     res.json({ id: c.id, valor: c.valor });
   });
 
@@ -23,6 +25,7 @@ function createCounterRouter({ Counter, incrementCounter, decrementCounter, rese
     const c = await Counter.findByPk(1);
     if (!c) return res.status(404).json({ error: 'not found' });
     await decrementCounter(c, DECREMENT_AMOUNT);
+    req.app.locals.io?.emit('counter:update', { valor: c.valor });
     res.json({ id: c.id, valor: c.valor });
   });
 
@@ -30,6 +33,7 @@ function createCounterRouter({ Counter, incrementCounter, decrementCounter, rese
     const c = await Counter.findByPk(1);
     if (!c) return res.status(404).json({ error: 'not found' });
     await resetCounter(c);
+    req.app.locals.io?.emit('counter:update', { valor: c.valor });
     res.json({ id: c.id, valor: c.valor });
   });
 

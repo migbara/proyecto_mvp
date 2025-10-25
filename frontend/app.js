@@ -1,5 +1,19 @@
 const base = window.__API_BASE__ || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'http://' + location.hostname + ':3000');
 
+// --- Socket.io: actualización en tiempo real ---
+const socket = io(base, {
+  withCredentials: true,
+  extraHeaders: {
+    "my-custom-header": "abcd"
+  },
+  transports: ["websocket"]
+});
+socket.on('counter:update', (data) => {
+  if (data && typeof data.valor === 'number') {
+    document.getElementById('value').textContent = data.valor;
+  }
+});
+
 async function fetchValue() {
   const res = await fetch(base + '/api/counter');
   if (!res.ok) return;
