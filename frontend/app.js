@@ -1,4 +1,5 @@
-const base = window.__API_BASE__ || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'http://' + location.hostname + ':3000');
+const base = window.__API_BASE__ || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'http://' + location.hostname + ':17061');
+// const base = window.__API_BASE__ || (location.hostname === 'localhost' ? 'http://hp-pavilion-1:3000' : 'http://hp-pavilion-1:3000');
 
 // --- Socket.io: actualización en tiempo real ---
 const socket = io(base, {

@@ -11,7 +11,7 @@ function parseOrigins(originsStr) {
 }
 
 // Define allowed origins
-const allowedOrigins = ['http://hp-pavilion-1:8000', 'http://localhost:8000', 'http://127.0.0.1:8000'];
+const allowedOrigins = ['http://192.168.1.10:17061', 'http://localhost:8000', 'http://127.0.0.1:8000'];
 const corsOptions = {
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps, curl, postman)

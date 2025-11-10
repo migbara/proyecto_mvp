@@ -1,0 +1,18 @@
+FROM node:20-slim
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Install only production dependencies
+COPY package*.json ./
+ENV NODE_ENV=production
+RUN npm ci --omit=dev
+
+# Copy source
+COPY . .
+
+# Expose app port
+EXPOSE 3000
+
+# Run the app in production mode
+CMD ["node", "src/index.js"]

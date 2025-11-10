@@ -19,7 +19,7 @@ async function start() {
   const server = http.createServer(app);
   const io = socketio(server, {
     cors: {
-      origin: ['http://hp-pavilion-1:8000', 'http://localhost:8000', 'http://127.0.0.1:8000'],
+      origin: ['http://192.168.1.10:17061', 'http://localhost:8000', 'http://127.0.0.1:8000'],
       methods: ['GET', 'POST'],
       credentials: true
     }
